@@ -66,12 +66,11 @@ public class AuthController : ControllerBase
             return BadRequest(new ErrorResponse { Errors = new List<ErrorDetail> { new() { Field = "", Message = "Invalid credentials" } } });
         
         var token = _jwtService.GenerateToken(user);
-        var expiryHours = int.Parse(HttpContext.RequestServices.GetRequiredService<IConfiguration>()["JwtSettings:ExpiryHours"] ?? "24");
         
         return Ok(new LoginResponse
         {
             Token = token,
-            ExpiresIn = expiryHours * 3600
+            ExpiresIn = 24 * 3600 // 24 hours in seconds
         });
     }
     
