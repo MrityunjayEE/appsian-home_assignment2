@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { projectsApi, schedulerApi } from '../services/api';
-import { ProjectDetail, ScheduleRequest, ScheduleResponse, ScheduleTaskInput } from '../types';
+import { ScheduleResponse } from '../types';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,19 +31,9 @@ const Scheduler: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      loadProject();
       loadSchedulerData();
     }
   }, [id]);
-
-  const loadProject = async () => {
-    try {
-      const data = await projectsApi.getById(parseInt(id!));
-      setProject(data);
-    } catch (error) {
-      console.error('Failed to load project:', error);
-    }
-  };
 
   const loadSchedulerData = async () => {
     try {
@@ -137,7 +127,7 @@ const Scheduler: React.FC = () => {
   // Auto-save when tasks change
   const tasks = watch('tasks');
   useEffect(() => {
-    if (tasks.length > 0 && tasks.some(task => task.title)) {
+    if (tasks.length > 0 && tasks.some((task: any) => task.title)) {
       const timeoutId = setTimeout(() => {
         saveCurrentTasks();
       }, 1000); // Debounce for 1 second

@@ -5,10 +5,9 @@ import { projectsApi, tasksApi } from '../services/api';
 import { ProjectDetail as ProjectDetailType, Task } from '../types';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, Plus, Calendar, CheckCircle2, Circle, Edit, Trash2, Zap, Clock } from "lucide-react";
 
