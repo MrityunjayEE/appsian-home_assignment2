@@ -11,8 +11,15 @@ public static class SeedData
         using var context = new ApplicationDbContext(
             serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>());
         
-        if (context.Users.Any())
-            return;
+        try
+        {
+            if (await context.Users.AnyAsync())
+                return;
+        }
+        catch
+        {
+            // Table might not exist yet, continue with seeding
+        }
         
         var passwordService = serviceProvider.GetRequiredService<IPasswordService>();
         

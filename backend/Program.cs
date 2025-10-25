@@ -92,9 +92,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-// Seed data
+// Ensure database is created and migrated
 using (var scope = app.Services.CreateScope())
 {
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await context.Database.MigrateAsync();
     await SeedData.Initialize(scope.ServiceProvider);
 }
 
