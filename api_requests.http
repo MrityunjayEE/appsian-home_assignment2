@@ -1,0 +1,90 @@
+### Register User
+POST https://localhost:7001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "test@example.com",
+  "password": "Test123!"
+}
+
+### Login User
+POST https://localhost:7001/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "demo@example.com",
+  "password": "Demo123!"
+}
+
+### Get Projects (requires token)
+GET https://localhost:7001/api/projects
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### Create Project (requires token)
+POST https://localhost:7001/api/projects
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "title": "New Project",
+  "description": "Project description"
+}
+
+### Get Project Details (requires token)
+GET https://localhost:7001/api/projects/1
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### Create Task (requires token)
+POST https://localhost:7001/api/projects/1/tasks
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "title": "New Task",
+  "dueDate": "2025-10-30"
+}
+
+### Update Task (requires token)
+PUT https://localhost:7001/api/tasks/1
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "title": "Updated Task",
+  "isCompleted": true
+}
+
+### Generate Schedule (requires token)
+POST https://localhost:7001/api/v1/projects/1/schedule
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "tasks": [
+    {
+      "title": "Design API",
+      "estimatedHours": 5,
+      "dueDate": "2025-10-25",
+      "dependencies": []
+    },
+    {
+      "title": "Implement Backend",
+      "estimatedHours": 12,
+      "dueDate": "2025-10-28",
+      "dependencies": ["Design API"]
+    },
+    {
+      "title": "Build Frontend",
+      "estimatedHours": 10,
+      "dueDate": "2025-10-30",
+      "dependencies": ["Design API"]
+    },
+    {
+      "title": "End-to-End Test",
+      "estimatedHours": 8,
+      "dueDate": "2025-10-31",
+      "dependencies": ["Implement Backend", "Build Frontend"]
+    }
+  ],
+  "workingHoursPerDay": 8
+}
