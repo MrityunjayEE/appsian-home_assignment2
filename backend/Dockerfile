@@ -17,4 +17,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 RUN mkdir -p /app/data
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "ProjectManager.dll"]
