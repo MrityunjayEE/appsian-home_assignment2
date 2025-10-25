@@ -13,12 +13,11 @@ import { ArrowLeft, Plus, Trash2, Zap, Calendar, Clock, AlertTriangle, CheckCirc
 
 const Scheduler: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<ProjectDetail | null>(null);
   const [scheduleResult, setScheduleResult] = useState<ScheduleResponse | null>(null);
   const [taskStatus, setTaskStatus] = useState<{[key: string]: {isCompleted: boolean, taskId?: number}}>({});
   const [loading, setLoading] = useState(false);
 
-  const { register, control, handleSubmit, setValue, watch } = useForm<ScheduleRequest>({
+  const { register, control, handleSubmit, setValue, watch } = useForm<any>({
     defaultValues: {
       tasks: [],
       workingHoursPerDay: 8
@@ -54,17 +53,17 @@ const Scheduler: React.FC = () => {
         setValue('tasks', savedTasks.map(task => ({
           ...task,
           dependencies: Array.isArray(task.dependencies) ? task.dependencies.join(', ') : task.dependencies
-        })));
+        })) as any);
       } else {
         // Load from project tasks if no scheduler tasks exist
         const projectData = await projectsApi.getById(parseInt(id!));
-        const taskInputs: ScheduleTaskInput[] = projectData.tasks.map(task => ({
+        const taskInputs = projectData.tasks.map(task => ({
           title: task.title,
           estimatedHours: 8,
           dueDate: task.dueDate ? task.dueDate.split('T')[0] : undefined,
           dependencies: ''
         }));
-        setValue('tasks', taskInputs);
+        setValue('tasks', taskInputs as any);
       }
       
       // Load saved schedule result
@@ -85,15 +84,15 @@ const Scheduler: React.FC = () => {
     }
   };
 
-  const onSubmit = async (data: ScheduleRequest) => {
+  const onSubmit = async (data: any) => {
     setLoading(true);
     try {
       const processedData = {
         ...data,
-        tasks: data.tasks.map(task => ({
+        tasks: data.tasks.map((task: any) => ({
           ...task,
           dependencies: typeof task.dependencies === 'string' 
-            ? task.dependencies.split(',').map(dep => dep.trim()).filter(dep => dep.length > 0)
+            ? task.dependencies.split(',').map((dep: string) => dep.trim()).filter((dep: string) => dep.length > 0)
             : task.dependencies || []
         }))
       };
@@ -113,10 +112,10 @@ const Scheduler: React.FC = () => {
   const saveCurrentTasks = async () => {
     try {
       const tasks = watch('tasks');
-      const processedTasks = tasks.map(task => ({
+      const processedTasks = tasks.map((task: any) => ({
         ...task,
         dependencies: typeof task.dependencies === 'string' 
-          ? task.dependencies.split(',').map(dep => dep.trim()).filter(dep => dep.length > 0)
+          ? task.dependencies.split(',').map((dep: string) => dep.trim()).filter((dep: string) => dep.length > 0)
           : task.dependencies || []
       }));
       
@@ -131,7 +130,7 @@ const Scheduler: React.FC = () => {
       title: '',
       estimatedHours: 8,
       dueDate: undefined,
-      dependencies: ''
+      dependencies: []
     });
   };
 
