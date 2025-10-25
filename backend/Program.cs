@@ -48,7 +48,9 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<ISchedulerService, SchedulerService>();
 
 // JWT Authentication
-var jwtSecretKey = builder.Configuration["JwtSettings:SecretKey"] ?? "your-super-secret-jwt-key-minimum-32-characters-long";
+var jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") 
+                  ?? builder.Configuration["JwtSettings:SecretKey"] 
+                  ?? "your-super-secret-jwt-key-minimum-32-characters-long";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

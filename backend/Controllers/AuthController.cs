@@ -58,20 +58,29 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(new ErrorResponse { Errors = ModelState.SelectMany(x => x.Value!.Errors).Select(e => new ErrorDetail { Field = "", Message = e.ErrorMessage }).ToList() });
-        
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
-        if (user == null || !_passwordService.VerifyPassword(user.PasswordHash, request.Password))
-            return BadRequest(new ErrorResponse { Errors = new List<ErrorDetail> { new() { Field = "", Message = "Invalid credentials" } } });
-        
-        var token = _jwtService.GenerateToken(user);
-        
-        return Ok(new LoginResponse
+        try
         {
-            Token = token,
-            ExpiresIn = 24 * 3600 // 24 hours in seconds
-        });
+            if (!ModelState.IsValid)
+                return BadRequest(new ErrorResponse { Errors = ModelState.SelectMany(x => x.Value!.Errors).Select(e => new ErrorDetail { Field = "", Message = e.ErrorMessage }).ToList() });
+            
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            if (user == null || !_passwordService.VerifyPassword(user.PasswordHash, request.Password))
+                return BadRequest(new ErrorResponse { Errors = new List<ErrorDetail> { new() { Field = "", Message = "Invalid credentials" } } });
+            
+            var token = _jwtService.GenerateToken(user);
+            
+            return Ok(new LoginResponse
+            {
+                Token = token,
+                ExpiresIn = 24 * 3600 // 24 hours in seconds
+            });
+        }
+        catch (Exception ex)
+        {
+            // Log the error but don't expose internal details
+            Console.WriteLine($"Login error: {ex.Message}");
+            return StatusCode(500, new ErrorResponse { Errors = new List<ErrorDetail> { new() { Field = "", Message = "An error occurred during login" } } });
+        }
     }
     
     [HttpPost("change-password")]
