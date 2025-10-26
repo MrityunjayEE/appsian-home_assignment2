@@ -1,117 +1,61 @@
 # Mini Project Manager
 
-A complete project management system with task scheduling capabilities.
+![Project Badge](https://img.shields.io/badge/status-active-brightgreen) ![Tech Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20Express%20%7C%20MongoDB-blue)
 
-## Tech Stack
+A **Mini Project Manager** web application to efficiently manage projects and tasks. Users can create projects, add tasks, and track progress through an intuitive interface.
 
-**Backend**: C# .NET 8, Entity Framework Core, SQLite, JWT Auth
-**Frontend**: React TypeScript, Vite, React Router, Tailwind CSS
+## 🌐 Live Demo
 
-## Quick Start
+- **Frontend:** [Mini Project Manager Frontend](https://appsian-home-assignment2-qr7p.vercel.app/login)  
+- **Backend:** [Mini Project Manager Backend](https://appsian-home-assignment2.onrender.com)
 
-### Prerequisites
-- .NET 8 SDK
-- Node.js 18+
-- Git
+## 💻 Features
 
-## Environment Variables
+- Create, update, and delete **projects**  
+- Add, edit, and remove **tasks** within projects  
+- Track task completion and project progress  
+- Clean and responsive UI for easy navigation  
+- Backend APIs built with Node.js and Express  
+- Data storage using MongoDB
 
-### Backend (.env or appsettings.Development.json)
-```json
-{
-  "JwtSettings": {
-    "SecretKey": "your-super-secret-jwt-key-minimum-32-characters-long",
-    "ExpiryHours": 24
-  }
-}
-```
+## 🛠 Tech Stack
 
-### Demo User
-- Username: `demo@example.com`
-- Password: `Demo123!`
+- **Frontend:** React.js  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB  
+- **Deployment:** Vercel (frontend), Render (backend)
 
-## API Endpoints
+## 🚀 Getting Started
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-
-### Projects
-- `GET /api/projects` - Get user's projects
-- `POST /api/projects` - Create project
-- `GET /api/projects/{id}` - Get project details
-- `DELETE /api/projects/{id}` - Delete project
-
-### Tasks
-- `POST /api/projects/{projectId}/tasks` - Create task
-- `PUT /api/tasks/{taskId}` - Update task
-- `DELETE /api/tasks/{taskId}` - Delete task
-
-### Smart Scheduler
-- `POST /api/v1/projects/{projectId}/schedule` - Generate task schedule
-
-## Testing
+### Clone the repository
 
 ```bash
-# Backend tests
-cd backend
-dotnet test
+git clone <your-repo-url>
+cd <your-repo-folder>
 
-# Frontend tests
+##  Frontend Setup
+
 cd frontend
-npm test
-```
+npm install
+npm start
 
-## Docker (Optional)
-
-```bash
-docker-compose up --build
-```
-
-## API Documentation
-
-Swagger UI available at: `https://localhost:7001/swagger`
+##  Backend Setup
+cd backend
+npm install
+npm run start
 
 ## Project Structure
 
-```
-├── backend/                 # .NET 8 Web API
-│   ├── Controllers/         # API Controllers
-│   ├── Models/             # Entity Models
-│   ├── DTOs/               # Data Transfer Objects
-│   ├── Services/           # Business Logic Services
-│   ├── Data/               # Database Context & Migrations
-│   └── ProjectManager.Tests/ # Unit Tests
-├── frontend/               # React TypeScript App
-│   ├── src/
-│   │   ├── components/     # React Components
-│   │   ├── contexts/       # React Contexts
-│   │   ├── services/       # API Services
-│   │   └── types/          # TypeScript Types
-│   └── public/
-├── docker-compose.yml      # Docker Configuration
-└── api_requests.http       # API Test Requests
-```
+Mini Project Manager
+├─ frontend/
+│  ├─ src/
+│  ├─ public/
+├─ backend/
+│  ├─ routes/
+│  ├─ controllers/
+│  ├─ models/
+├─ README.md
 
-## Features Implemented
+##🤝 Contribution
 
-✅ User registration and JWT authentication
-✅ Project CRUD operations with ownership validation
-✅ Task management within projects
-✅ Smart scheduler with dependency resolution
-✅ Cycle detection in task dependencies
-✅ Responsive React frontend with Tailwind CSS
-✅ Form validation on both client and server
-✅ Unit tests for backend services
-✅ Docker containerization
-✅ Swagger API documentation
-✅ Database migrations and seed data
-
-## Development Notes
-
-- JWT tokens are stored in localStorage
-- SQLite database is used for simplicity
-- CORS is configured for frontend-backend communication
-- All API endpoints require authentication except auth endpoints
-- Users can only access their own projects and tasks
-- Scheduler provides deterministic task ordering and scheduling
+Feel free to fork, improve features, or fix bugs. Contributions are welcome!
