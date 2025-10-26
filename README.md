@@ -6,7 +6,7 @@ A **Mini Project Manager** web application to efficiently manage projects and ta
 
 ## 🌐 Live Demo
 
-- **Frontend:** [Mini Project Manager Frontend](https://appsian-home-assignment2-qr7p.vercel.app/login)  
+- **Deployment Link:** [Mini Project Manager Frontend](https://appsian-home-assignment2-qr7p.vercel.app/login)  
 
 ## 💻 Features
 
