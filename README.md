@@ -14,27 +14,6 @@ A complete project management system with task scheduling capabilities.
 - Node.js 18+
 - Git
 
-### Backend Setup
-
-```bash
-cd backend
-dotnet restore
-dotnet ef database update
-dotnet run
-```
-
-Backend runs on `https://localhost:7001`
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend runs on `http://localhost:5173`
-
 ## Environment Variables
 
 ### Backend (.env or appsettings.Development.json)
