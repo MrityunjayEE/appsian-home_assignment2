@@ -1,7 +1,5 @@
 # Mini Project Manager
 
-![Project Badge](https://img.shields.io/badge/status-active-brightgreen) ![Tech Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20Express%20%7C%20MongoDB-blue)
-
 A **Mini Project Manager** web application to efficiently manage projects and tasks. Users can create projects, add tasks, and track progress through an intuitive interface.
 
 ## 🌐 Live Demo
