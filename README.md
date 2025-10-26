@@ -1,6 +1,6 @@
 # Mini Project Manager
 
-A **Mini Project Manager** web application to efficiently manage projects and tasks. Users can create projects, add tasks, and track progress through an intuitive interface.
+A **Mini Project Manager** web application to efficiently manage projects and tasks. Users can create projects, add tasks, and track progress through an intuitive interface. It is also mobile user friendly.
 
 ## 🌐 Live Demo
 
